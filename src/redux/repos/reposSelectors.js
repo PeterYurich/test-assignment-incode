@@ -1,0 +1,1 @@
+export const selectIssues = state => state.repos;
