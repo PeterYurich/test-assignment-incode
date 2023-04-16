@@ -26,7 +26,6 @@ export default function Search() {
 
     const arr = enteredUrl.split("/")
     const [repoOwner, repoName] = [arr[3].toLocaleLowerCase(), arr[4].toLocaleLowerCase()]
-    // console.log(`${repoOwner}/${repoName}`);
 
     dispatch(fetchRepo([repoOwner, repoName]))
     dispatch(fetchIssues([repoOwner, repoName]))

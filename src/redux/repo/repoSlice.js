@@ -26,23 +26,13 @@ export const repoSlice = createSlice({
                 state.isLoading = false;
                 state.error = payload;
             })
+
             .addCase(fetchIssues.pending, state => {
                 state.isLoading = true;
             })
             .addCase(fetchIssues.fulfilled, (state, { payload }) => {
                 state.isLoading = false;
-                const targetData = payload.map(issue => {
-                    return {
-                        id: issue.id,
-                        title: issue.title,
-                        number: issue.number,
-                        author: issue.user.login,
-                        comments: issue.comments,
-                        updated_at: issue.updated_at
-                    }
-                })
-                console.log('targetData: ', targetData);
-                state.issues = targetData
+                state.issues = payload
             })
             .addCase(fetchIssues.rejected, (state, { payload }) => {
                 state.isLoading = false;
