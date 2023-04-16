@@ -1,13 +1,13 @@
 import { Box, Button, OutlinedInput } from '@mui/material';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchRepo } from 'redux/repos/reposOperations';
+import { fetchRepo, fetchIssues } from 'redux/repo/repoOperations';
 
 
 export default function Search() {
   const [enteredUrl, setEnteredUrl] = useState('')
-  const [owner, setOwner] = useState('')
-  const [repo, setRepo] = useState('')
+  // const [repoOwner, setRepoOwner] = useState('')
+  // const [repoName, setRepoName] = useState('')
   const dispatch = useDispatch()
 
   const handleChange = (e) => {
@@ -26,9 +26,10 @@ export default function Search() {
 
     const arr = enteredUrl.split("/")
     const [repoOwner, repoName] = [arr[3].toLocaleLowerCase(), arr[4].toLocaleLowerCase()]
-    console.log(`${repoOwner}/${repoName}`);
+    // console.log(`${repoOwner}/${repoName}`);
 
     dispatch(fetchRepo([repoOwner, repoName]))
+    dispatch(fetchIssues([repoOwner, repoName]))
 
   }
 

@@ -11,18 +11,18 @@ import {
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import { reposSlice } from 'redux/repos/reposSlice';
+import { repoSlice } from 'redux/repo/repoSlice';
 
 
-const reposPersistConfig = {
-  key: 'repos',
+const repoPersistConfig = {
+  key: 'repo',
   storage,
 };
 
 export const store = configureStore({
   reducer: {
-    auth: persistReducer(reposPersistConfig, reposSlice.reducer),
-    repos: reposSlice.reducer,
+    auth: persistReducer(repoPersistConfig, repoSlice.reducer),
+    repo: repoSlice.reducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
