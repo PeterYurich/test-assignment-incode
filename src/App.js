@@ -1,11 +1,14 @@
-import logo from './logo.svg';
 import './App.css';
+// import { Search } from "components"
+import { Box } from '@mui/material';
+import { Search } from 'components';
+
 
 function App() {
   return (
-    <div>
-      asdf
-    </div>
+    <Box component='div' sx={{m: 4}}>
+      <Search />
+    </Box>
   );
 }
 
