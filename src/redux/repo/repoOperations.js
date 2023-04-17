@@ -5,11 +5,9 @@ import axios from "axios";
 axios.defaults.baseURL = `https://api.github.com`
 
 export const fetchRepo = createAsyncThunk("repo/fetchData",
-    async ([repoOwner, repoName], { rejectWithValue }) => {
+    async ({ repoOwner, repoName }, { rejectWithValue }) => {
         try {
-            console.log('url: ', `/repos/${repoOwner}/${repoName}`);
-            const response = 
-            await axios.get(`/repos/${repoOwner}/${repoName}`);
+            const response = await axios.get(`/repos/${repoOwner}/${repoName}`);
             return response.data
         } catch (error) {
             return rejectWithValue(error.message)
@@ -17,10 +15,10 @@ export const fetchRepo = createAsyncThunk("repo/fetchData",
     });
 
 export const fetchIssues = createAsyncThunk("issues/fetchData",
-    async ([repoOwner, repoName], { rejectWithValue }) => {
+    async ({ repoOwner, repoName }, { rejectWithValue }) => {
+
         try {
-            const response = 
-            await axios.get(`/repos/${repoOwner}/${repoName}/issues`);
+            const response = await axios.get(`/repos/${repoOwner}/${repoName}/issues`);
             const data = response.data
             const payload = data.map(issue => {
                 return {

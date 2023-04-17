@@ -1,1 +1,1 @@
-export const selectIssues = state => state.repo;
+export const selectRepo = state => state.repo;

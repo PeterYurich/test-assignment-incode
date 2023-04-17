@@ -1,13 +1,15 @@
 import './App.css';
 // import { Search } from "components"
 import { Box } from '@mui/material';
-import { Search } from 'components';
+import { Dashboard, GithubLinks, Search } from 'components';
 
 
 function App() {
   return (
-    <Box component='div' sx={{m: 4}}>
+    <Box component='div' className='container'>
       <Search />
+      <GithubLinks />
+      <Dashboard />
     </Box>
   );
 }

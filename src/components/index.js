@@ -1,5 +1,10 @@
 import Search from "./Search/Search";
+import GithubLinks from "./GithubLinks";
+import Dashboard from "./dashboard/Dashboard";
 
 export {
-    Search
+    Search,
+    GithubLinks,
+    Dashboard,
+
 }
