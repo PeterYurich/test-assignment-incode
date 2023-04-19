@@ -45,10 +45,6 @@ export default function Dashboard() {
 
     const dragOverHandler = (e) => {
         e.preventDefault()
-        if (e.target.tagName === 'DIV') {
-            // e.target.style.backgroundColor = 'lightgray'
-            // e.target.style.boxShadow = '0 2px 3px gray'
-        }
     }
 
     const dropHandler = (e, finishIssueId, finishBoardIndex) => {
