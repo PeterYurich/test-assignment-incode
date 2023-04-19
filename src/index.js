@@ -12,7 +12,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import { ThemeProvider } from '@mui/system';
 import { createTheme } from '@mui/material/styles';
-import { ThemeOptions } from 'muiSettings/muiSettings';
+import { ThemeOptions } from 'uiSettings/muiSettings';
 
 const theme = createTheme(ThemeOptions);
 

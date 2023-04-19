@@ -31,14 +31,20 @@ export default function Dashboard() {
 
     }, [currentRepo])
 
+    const writeTime = (data) => {
+        const timeDiff = timeTillNow(data)
+        if (timeDiff === 0) {
+            return 'opened today'
+        }
+        if (timeDiff === 1) {
+            return 'opened yesterday'
+        }
+        return `opened ${timeDiff} ago`
+    }
+
     const dragStartHandler = (e, issueId, boardIndex) => {
         setHeldIssueId(issueId)
         setStartBoardIndex(boardIndex)
-    }
-
-    const dragLeaveHandler = (e) => {
-        e.target.style.boxShadow = 'none'
-
     }
 
     const dragEndHandler = (e) => {
@@ -82,17 +88,6 @@ export default function Dashboard() {
     }
 
 
-    const writeTime = (data) => {
-        const timeDiff = timeTillNow(data)
-        if (timeDiff === 0) {
-            return 'opened today'
-        }
-        if (timeDiff === 1) {
-            return 'opened yesterday'
-        }
-        return `opened ${timeDiff} ago`
-    }
-
     return (
         <Box>
             <List className={css.boardWrapper}>
@@ -116,7 +111,6 @@ export default function Dashboard() {
                                         <ListItem key={issueId} sx={{ p: 0 }}
                                             draggable={true}
                                             onDragStart={(e) => dragStartHandler(e, issueId, boardIndex)}
-                                            onDragLeave={(e) => dragLeaveHandler(e)}
                                             onDragEnd={(e) => dragEndHandler(e)}
                                             onDragOver={(e) => dragOverHandler(e)}
                                             onDrop={(e) => dropHandler(e, issueId, boardIndex)}

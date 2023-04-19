@@ -6,7 +6,8 @@ const initialState = {
     id: '',
     stars: 0,
     fullName: null,
-    issues: []
+    issues: [],
+    isLoading: false
 }
 
 export const repoSlice = createSlice({
