@@ -13,7 +13,7 @@ export default function Dashboard() {
     const savedBoardState = storage.load(`${currentRepo.id}`)
     const [boardsState, setBoardsState] = useState(savedBoardState || [
         { id: 1, title: 'To Do', items: [] },
-        { id: 2, title: 'In Progress', items: [1664953332] },
+        { id: 2, title: 'In Progress', items: [] },
         { id: 3, title: 'Done', items: [] }
     ])
 
@@ -64,6 +64,7 @@ export default function Dashboard() {
         newBoardsState[startBoardIndex].items.splice(heldIssueIndex, 1)
         newBoardsState[finishBoardIndex].items.splice(finishIssueIndex, 0, heldIssueId)
         setBoardsState(newBoardsState)
+        storage.save(`${currentRepo.id}`, newBoardsState)
     }
 
     const dropCardHandler = (e, finishBoardIndex) => {
@@ -79,7 +80,7 @@ export default function Dashboard() {
         newBoardsState[startBoardIndex].items.splice(heldIssueIndex, 1)
 
         setBoardsState(newBoardsState)
-
+        storage.save(`${currentRepo.id}`, newBoardsState)
     }
 
     return (
