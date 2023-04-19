@@ -12,8 +12,9 @@ code {
     monospace;
 }
 
-.box {
-  padding: 60px;
+
+li {
+  list-style: none;
 }
 
 .container {
