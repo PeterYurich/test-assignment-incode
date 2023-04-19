@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import css from "./dashboard.module.css"
-import { Paper, Typography, Box, Divider, List, ListItem } from '@mui/material'
+import { Paper, Typography, Box, Divider, List, ListItem, Card } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { selectRepo } from 'redux/repo/repoSelectors'
 import storage from 'utils/storage'
+import { timeTillNow } from 'utils/timeTillNow'
+
 
 export default function Dashboard() {
     const [heldIssueId, setHeldIssueId] = useState()
@@ -45,10 +47,6 @@ export default function Dashboard() {
 
     const dragOverHandler = (e) => {
         e.preventDefault()
-        if (e.target.name === "card") {
-            console.log('asdf');
-            e.target.style.boxShadow = '0px 3px 15px 13px rgba(0,0,0,0.75)'
-        }
     }
 
     const dropHandler = (e, finishIssueId, finishBoardIndex) => {
@@ -83,6 +81,18 @@ export default function Dashboard() {
         storage.save(`${currentRepo.id}`, newBoardsState)
     }
 
+
+    const writeTime = (data) => {
+        const timeDiff = timeTillNow(data)
+        if (timeDiff === 0) {
+            return 'opened today'
+        }
+        if (timeDiff === 1) {
+            return 'opened yesterday'
+        }
+        return `opened ${timeDiff} ago`
+    }
+
     return (
         <Box>
             <List className={css.boardWrapper}>
@@ -111,20 +121,22 @@ export default function Dashboard() {
                                             onDragOver={(e) => dragOverHandler(e)}
                                             onDrop={(e) => dropHandler(e, issueId, boardIndex)}
                                         >
-                                            <Paper className={css.issueCard} >
-                                                <Typography className={css.issueTitle}>
-                                                    {cardContent?.title}
-                                                </Typography>
-                                                <Box className='rowFlexBox'>
-                                                    <Typography>#{cardContent.number}</Typography>
-                                                    <Typography>{cardContent.openedAt}</Typography>
-                                                </Box>
-                                                <Box className='rowFlexBox'>
-                                                    <Typography>{cardContent.author}</Typography>
-                                                    <Divider flexItem orientation="vertical" />
-                                                    <Typography> Comments: {cardContent.comments} </Typography>
-                                                </Box>
-                                            </Paper>
+                                            <Card className={css.issueCard} >
+                                                    <Typography className={css.issueTitle} variant='subtitle1'>
+                                                        {cardContent?.title}
+                                                    </Typography>
+                                                    <Box className='rowFlexBox' variant='string'>
+                                                        <Typography  >#{cardContent.number}</Typography>
+                                                        <Typography>
+                                                            {writeTime(cardContent.openedAt)}
+                                                        </Typography>
+                                                    </Box>
+                                                    <Box className='rowFlexBox'>
+                                                        <Typography>{cardContent.author}</Typography>
+                                                        <Divider flexItem orientation="vertical" />
+                                                        <Typography> Comments: {cardContent.comments} </Typography>
+                                                    </Box>
+                                            </Card>
                                         </ListItem>
                                     )
                                 })}

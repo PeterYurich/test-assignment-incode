@@ -1,14 +1,16 @@
-import { Box, Icon, Link, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { selectRepo } from 'redux/repo/repoSelectors'
 import separateThousands from 'utils/separateThousands';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
-
+import {useTheme} from '@mui/material';
 
 export default function Stars() {
     const currentRepo = useSelector(selectRepo)
     const [starsAmount, setStarsAmount] = useState()
+
+    const { palette } = useTheme()
 
     useEffect(() => {
         const starsAmount = currentRepo.stars
@@ -23,7 +25,7 @@ export default function Stars() {
     return (
         <>
             {<Box className='rowFlexBox' >
-                <StarRoundedIcon></StarRoundedIcon>
+                <StarRoundedIcon htmlColor={palette.primary.main}></StarRoundedIcon>
                 <Typography >{starsAmount} stars</Typography>
             </Box>
             }

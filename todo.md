@@ -1,7 +1,3 @@
-- time distance
 - custom theme mui
-- style normalize
-- star
-- board style
 - loader
 - tests Jest

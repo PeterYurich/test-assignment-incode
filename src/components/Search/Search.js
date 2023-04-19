@@ -20,14 +20,14 @@ export default function Search() {
     const regexp = /^(http|https|ftp):\/\/(github.com+)/i
 
     if (!regexp.test(enteredUrl.toLocaleLowerCase())) {
-      alert('Check if your link to repo is correct please')
+      alert('Check if your repo link is correct please!')
       return
     }
 
     storage.save('enteredUrl', enteredUrl)
 
     const arr = enteredUrl.split("/")
-    const [repoOwner, repoName] = [arr[3].toLocaleLowerCase(), arr[4].toLocaleLowerCase()]
+    const [repoOwner, repoName] = [arr[3]?.toLocaleLowerCase(), arr[4]?.toLocaleLowerCase()]
 
     dispatch(fetchRepo({repoOwner, repoName}))
     dispatch(fetchIssues({repoOwner, repoName}))
