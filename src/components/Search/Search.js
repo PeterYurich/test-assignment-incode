@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchRepo, fetchIssues } from 'redux/repo/repoOperations';
 import storage from 'utils/storage';
+import css from "./search.module.css"
 
 
 export default function Search() {
@@ -34,13 +35,14 @@ export default function Search() {
 
   return (
     <div>
-      <Box component="form" noValidate autoComplete="off">
+      <Box className={css.box}>
         <OutlinedInput placeholder="Enter repo URL"
           value={enteredUrl}
           onChange={handleChange}
-          sx={{ mr: 1, width: "100%" }}
+          className={css.inputField}
         />
-        <Button variant='outlined' onClick={loadRepoIssues}>Load issues</Button>
+        <Button variant='outlined'
+        onClick={loadRepoIssues}>Load issues</Button>
       </Box>
     </div>
   )
