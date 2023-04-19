@@ -1,4 +1,5 @@
 - custom theme mui
 - star
-- boardstyle
+- board style
+- loader
 - tests Jest

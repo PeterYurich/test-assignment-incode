@@ -1,14 +1,16 @@
 import './App.css';
-// import { Search } from "components"
 import { Box } from '@mui/material';
-import { Dashboard, GithubLinks, Search } from 'components';
+import { Dashboard, GithubLinks, Search, Stars } from 'components';
 
 
 function App() {
   return (
     <Box component='div' className='container'>
       <Search />
-      <GithubLinks />
+      <Box className='rowFlexBox'>
+        <GithubLinks />
+        <Stars />
+      </Box>
       <Dashboard />
     </Box>
   );

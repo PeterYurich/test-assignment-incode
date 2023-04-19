@@ -111,11 +111,11 @@ export default function Dashboard() {
                                                     <Typography className={css.issueTitle}>
                                                         {cardContent?.title}
                                                     </Typography>
-                                                    <Box className={css.rowFlexBox}>
+                                                    <Box className='rowFlexBox'>
                                                         <Typography>#{cardContent.number}</Typography>
                                                         <Typography>{cardContent.openedAt}</Typography>
                                                     </Box>
-                                                    <Box className={css.rowFlexBox}>
+                                                    <Box className='rowFlexBox'>
                                                         <Typography>{cardContent.author}</Typography>
                                                         <Divider flexItem orientation="vertical" />
                                                         <Typography> Comments: {cardContent.comments} </Typography>
