@@ -13,7 +13,7 @@ export default function Dashboard() {
     const savedBoardState = storage.load(`${currentRepo.id}`)
     const [boardsState, setBoardsState] = useState(savedBoardState || [
         { id: 1, title: 'To Do', items: [] },
-        { id: 2, title: 'In Progress', items: [] },
+        { id: 2, title: 'In Progress', items: [1664953332] },
         { id: 3, title: 'Done', items: [] }
     ])
 
@@ -28,7 +28,6 @@ export default function Dashboard() {
         setBoardsState(savedBoardState)
 
     }, [currentRepo])
-
 
     const dragStartHandler = (e, issueId, boardIndex) => {
         setHeldIssueId(issueId)
@@ -46,22 +45,41 @@ export default function Dashboard() {
 
     const dragOverHandler = (e) => {
         e.preventDefault()
-        if (e.target.tagName == 'DIV') {
-            e.target.style.backgroundColor = 'lightgray'
+        if (e.target.tagName === 'DIV') {
+            // e.target.style.backgroundColor = 'lightgray'
             // e.target.style.boxShadow = '0 2px 3px gray'
         }
     }
 
     const dropHandler = (e, finishIssueId, finishBoardIndex) => {
         e.preventDefault()
+
         const newBoardsState = [...boardsState]
+
         const heldIssueIndex = boardsState[startBoardIndex].items.indexOf(heldIssueId)
+        const finishIssueIndex = boardsState[finishBoardIndex].items.indexOf(finishIssueId)
+
+        if (heldIssueId === finishIssueId) { return }
+
         newBoardsState[startBoardIndex].items.splice(heldIssueIndex, 1)
-        newBoardsState[finishBoardIndex].items.splice(finishIssueId, 0, heldIssueId)
+        newBoardsState[finishBoardIndex].items.splice(finishIssueIndex, 0, heldIssueId)
         setBoardsState(newBoardsState)
     }
 
-    const dropCardHandler = () => {
+    const dropCardHandler = (e, finishBoardIndex) => {
+        e.preventDefault()
+
+        if (boardsState[finishBoardIndex].items.includes(heldIssueId)) { return }
+        // if (heldIssueId === )
+
+        const newBoardsState = [...boardsState]
+
+        newBoardsState[finishBoardIndex].items.push(heldIssueId)
+
+        const heldIssueIndex = boardsState[startBoardIndex].items.indexOf(heldIssueId)
+        newBoardsState[startBoardIndex].items.splice(heldIssueIndex, 1)
+
+        setBoardsState(newBoardsState)
 
     }
 
@@ -70,13 +88,13 @@ export default function Dashboard() {
             <List className={css.boardWrapper}>
                 {boardsState.map((board, boardIndex) => (
                     <ListItem className={css.board} key={board.id}
-                    onDragOver={(e) => dragOverHandler(e)}
-                    onDrop={(e) => dropCardHandler(e, board)}
+                        onDragOver={(e) => dragOverHandler(e)}
+                        onDrop={(e) => dropCardHandler(e, boardIndex)}
                     >
                         <Typography variant='h5' className={css.boardTitle}>
                             {board.title}
                         </Typography>
-                        <Paper  className={css.boardPaper}>
+                        <Paper className={css.boardPaper}>
                             <List>
                                 {board.items.length > 0 && board.items.map((issueId, index, arr) => {
                                     const cardContent = currentRepo.issues.find(issue => issue.id === issueId)
@@ -85,7 +103,7 @@ export default function Dashboard() {
                                         return
                                     }
                                     return (
-                                        <ListItem name='card' key={issueId} sx={{ p: 0 }}
+                                        <ListItem key={issueId} sx={{ p: 0 }}
                                             draggable={true}
                                             onDragStart={(e) => dragStartHandler(e, issueId, boardIndex)}
                                             onDragLeave={(e) => dragLeaveHandler(e)}
