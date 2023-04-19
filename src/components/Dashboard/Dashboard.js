@@ -35,7 +35,7 @@ export default function Dashboard() {
     }
 
     const dragLeaveHandler = (e) => {
-        // e.target.style.background = 'white'
+        e.target.style.boxShadow = 'none'
 
     }
 
@@ -45,6 +45,10 @@ export default function Dashboard() {
 
     const dragOverHandler = (e) => {
         e.preventDefault()
+        if (e.target.name === "card") {
+            console.log('asdf');
+            e.target.style.boxShadow = '0px 3px 15px 13px rgba(0,0,0,0.75)'
+        }
     }
 
     const dropHandler = (e, finishIssueId, finishBoardIndex) => {
@@ -91,39 +95,40 @@ export default function Dashboard() {
                             {board.title}
                         </Typography>
                         <div className={css.boardPaper}>
-                                <List>
-                                    {board.items.length > 0 && board.items.map((issueId, index, arr) => {
-                                        const cardContent = currentRepo.issues.find(issue => issue.id === issueId)
-                                        if (!cardContent) { arr.splice(index, 1)
-                                            return <></>
-                                        }
-                                        return (
-                                            <ListItem key={issueId} sx={{ p: 0 }}
-                                                draggable={true}
-                                                onDragStart={(e) => dragStartHandler(e, issueId, boardIndex)}
-                                                onDragLeave={(e) => dragLeaveHandler(e)}
-                                                onDragEnd={(e) => dragEndHandler(e)}
-                                                onDragOver={(e) => dragOverHandler(e)}
-                                                onDrop={(e) => dropHandler(e, issueId, boardIndex)}
-                                            >
-                                                <Paper className={css.issueCard} >
-                                                    <Typography className={css.issueTitle}>
-                                                        {cardContent?.title}
-                                                    </Typography>
-                                                    <Box className='rowFlexBox'>
-                                                        <Typography>#{cardContent.number}</Typography>
-                                                        <Typography>{cardContent.openedAt}</Typography>
-                                                    </Box>
-                                                    <Box className='rowFlexBox'>
-                                                        <Typography>{cardContent.author}</Typography>
-                                                        <Divider flexItem orientation="vertical" />
-                                                        <Typography> Comments: {cardContent.comments} </Typography>
-                                                    </Box>
-                                                </Paper>
-                                            </ListItem>
-                                        )
-                                    })}
-                                </List>
+                            <List>
+                                {board.items.length > 0 && board.items.map((issueId, index, arr) => {
+                                    const cardContent = currentRepo.issues.find(issue => issue.id === issueId)
+                                    if (!cardContent) {
+                                        arr.splice(index, 1)
+                                        return <></>
+                                    }
+                                    return (
+                                        <ListItem key={issueId} sx={{ p: 0 }}
+                                            draggable={true}
+                                            onDragStart={(e) => dragStartHandler(e, issueId, boardIndex)}
+                                            onDragLeave={(e) => dragLeaveHandler(e)}
+                                            onDragEnd={(e) => dragEndHandler(e)}
+                                            onDragOver={(e) => dragOverHandler(e)}
+                                            onDrop={(e) => dropHandler(e, issueId, boardIndex)}
+                                        >
+                                            <Paper className={css.issueCard} >
+                                                <Typography className={css.issueTitle}>
+                                                    {cardContent?.title}
+                                                </Typography>
+                                                <Box className='rowFlexBox'>
+                                                    <Typography>#{cardContent.number}</Typography>
+                                                    <Typography>{cardContent.openedAt}</Typography>
+                                                </Box>
+                                                <Box className='rowFlexBox'>
+                                                    <Typography>{cardContent.author}</Typography>
+                                                    <Divider flexItem orientation="vertical" />
+                                                    <Typography> Comments: {cardContent.comments} </Typography>
+                                                </Box>
+                                            </Paper>
+                                        </ListItem>
+                                    )
+                                })}
+                            </List>
                         </div>
                     </ListItem>
                 ))}
