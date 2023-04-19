@@ -82,15 +82,5 @@ export const ThemeOptions = {
                 },
             ],
         },
-        MuiContainer: {
-            variants: [
-                {
-                    props: { component: 'main' },
-                    style: {
-                        backgroundColor: palette.background.default,
-                    },
-                },
-            ],
-        },
     },
 };

@@ -1,5 +1,5 @@
 import './App.css';
-import { Box, Container } from '@mui/material';
+import { Container, Box } from '@mui/material';
 import { Dashboard, GithubLinks, Search, Stars } from 'components';
 import { useSelector } from 'react-redux';
 import { selectRepo } from 'redux/repo/repoSelectors';
@@ -11,11 +11,14 @@ function App() {
   return (
     <Container component="main" >
       <Search />
-      {currentRepo.id && <Box className='rowFlexBox'>
-        <GithubLinks />
-        <Stars />
-      </Box>}
-      <Dashboard />
+      {currentRepo.id &&
+        <Container >
+          <Box className='rowFlexBox'>
+            <GithubLinks />
+            <Stars />
+          </Box>
+          <Dashboard />
+        </Container>}
     </Container>
   );
 }
