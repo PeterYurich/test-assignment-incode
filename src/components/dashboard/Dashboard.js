@@ -70,7 +70,6 @@ export default function Dashboard() {
         e.preventDefault()
 
         if (boardsState[finishBoardIndex].items.includes(heldIssueId)) { return }
-        // if (heldIssueId === )
 
         const newBoardsState = [...boardsState]
 
