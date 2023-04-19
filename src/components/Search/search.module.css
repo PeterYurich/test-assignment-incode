@@ -12,4 +12,6 @@
 
 .button {
     height: 56px;
+    display: flex;
+    justify-content: start;
 }

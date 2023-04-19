@@ -12,7 +12,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import { ThemeProvider } from '@mui/system';
 import { createTheme } from '@mui/material/styles';
-import { ThemeOptions } from 'muiSettings/muiSettings';
+import { ThemeOptions } from 'uiSettings/muiSettings';
 
 const theme = createTheme(ThemeOptions);
 
@@ -21,9 +21,7 @@ root.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor} >
       <ThemeProvider theme={theme}>
-        <BrowserRouter
-        // basename="test-assignment-incode"
-        >
+        <BrowserRouter>
           <App />
         </BrowserRouter>
       </ThemeProvider>

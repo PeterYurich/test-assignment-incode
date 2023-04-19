@@ -1,3 +1,1 @@
-- custom theme mui
-- loader
 - tests Jest

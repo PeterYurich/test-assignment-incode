@@ -1,15 +1,16 @@
 import { Box, Button, OutlinedInput } from '@mui/material';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchRepo, fetchIssues } from 'redux/repo/repoOperations';
 import storage from 'utils/storage';
 import css from "./search.module.css"
+import { selectRepo } from 'redux/repo/repoSelectors';
+import { Loader } from 'components/Loader/Loader';
 
 
 export default function Search() {
   const [enteredUrl, setEnteredUrl] = useState(storage.load('enteredUrl') || "")
-  // const [repoOwner, setRepoOwner] = useState('')
-  // const [repoName, setRepoName] = useState('')
+  const { isLoading } = useSelector(selectRepo)
   const dispatch = useDispatch()
 
   const handleChange = (e) => {
@@ -29,8 +30,8 @@ export default function Search() {
     const arr = enteredUrl.split("/")
     const [repoOwner, repoName] = [arr[3]?.toLocaleLowerCase(), arr[4]?.toLocaleLowerCase()]
 
-    dispatch(fetchRepo({repoOwner, repoName}))
-    dispatch(fetchIssues({repoOwner, repoName}))
+    dispatch(fetchRepo({ repoOwner, repoName }))
+    dispatch(fetchIssues({ repoOwner, repoName }))
   }
 
   return (
@@ -41,8 +42,10 @@ export default function Search() {
           onChange={handleChange}
           className={css.inputField}
         />
-        <Button variant='outlined' className={css.button}
-        onClick={loadRepoIssues}>Load issues</Button>
+        {isLoading ? <Loader /> :
+          <Button variant='outlined' className={css.button}
+            onClick={loadRepoIssues}>Load issues </Button>
+        }
       </Box>
     </div>
   )
