@@ -1,4 +1,5 @@
 - custom theme mui
+- style normalize
 - star
 - board style
 - loader

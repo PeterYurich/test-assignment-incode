@@ -24,8 +24,7 @@ export default function GithubLinks() {
 
     return (
         <>
-            {currentRepo.fullName &&
-                <Box className={css.box}
+            { <Box className={css.box}
                 sx={{mb: 1}}
                 >
                     <Link href={`https://github.com/${repoOwner}`}>{`${repoOwner}`}</Link>

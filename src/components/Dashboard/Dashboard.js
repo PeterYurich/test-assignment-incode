@@ -91,7 +91,6 @@ export default function Dashboard() {
                             {board.title}
                         </Typography>
                         <div className={css.boardPaper}>
-                            {/* <Paper> */}
                                 <List>
                                     {board.items.length > 0 && board.items.map((issueId, index, arr) => {
                                         const cardContent = currentRepo.issues.find(issue => issue.id === issueId)
@@ -125,7 +124,6 @@ export default function Dashboard() {
                                         )
                                     })}
                                 </List>
-                            {/* </Paper> */}
                         </div>
                     </ListItem>
                 ))}
