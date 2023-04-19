@@ -1,33 +1,38 @@
-.mainBoard {
+.boardWrapper {
   max-width: 1400px;
   width: 100%;
   min-height: 200px;
   display: flex;
   padding: 20px;
   gap: 30px;
+  align-items: start;
 }
 
-.taskBoard {
+.board {
   width: calc((100% - 60px) / 3);
+
+  flex-direction: column;
+}
+
+.boardPaper {
+  min-height: 100vh;
   background-color: rgb(196, 229, 196);
   padding: 10px;
+  display: flex;
+  width: 100%;
 }
 
 .boardTitle {
-  border-bottom: 2px solid black;
   text-align: center;
-  box-shadow: 0px 8px 8px -11px rgba(0, 0, 0, 0.75);
-  margin-bottom: 15px;
-}
-
-.issueCardWrapper {
-  z-index: 10;
+  margin-bottom: 10px;
+  width: 100%;
 }
 
 .issueCard {
   margin-bottom: 10px;
   padding: 6px;
   cursor: grab;
+  width: 100%;
 }
 
 .issueTitle {
@@ -36,5 +41,6 @@
 
 .rowFlexBox {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px
 }

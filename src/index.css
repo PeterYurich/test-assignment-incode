@@ -12,6 +12,11 @@ code {
     monospace;
 }
 
+
+li {
+  list-style: none;
+}
+
 .container {
   padding-left: 20px;
   padding-right: 20px;
