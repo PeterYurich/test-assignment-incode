@@ -32,7 +32,6 @@
   padding: 6px;
   cursor: grab;
   width: 100%;
-  /* touch-action: none; */
 }
 
 .issueTitle {

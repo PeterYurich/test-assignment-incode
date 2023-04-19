@@ -20,7 +20,7 @@ export default function Search() {
     const regexp = /^(http|https|ftp):\/\/(github.com+)/i
 
     if (!regexp.test(enteredUrl.toLocaleLowerCase())) {
-      alert('Check if your link to repo is correct please')
+      alert('Check if your repo link is correct please!')
       return
     }
 

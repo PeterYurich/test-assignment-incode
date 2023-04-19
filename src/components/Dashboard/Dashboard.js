@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import css from "./dashboard.module.css"
-import { Paper, Typography, Box, Divider, List, ListItem } from '@mui/material'
+import { Paper, Typography, Box, Divider, List, ListItem, Card } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { selectRepo } from 'redux/repo/repoSelectors'
 import storage from 'utils/storage'
@@ -121,22 +121,22 @@ export default function Dashboard() {
                                             onDragOver={(e) => dragOverHandler(e)}
                                             onDrop={(e) => dropHandler(e, issueId, boardIndex)}
                                         >
-                                            <Paper className={css.issueCard} >
-                                                <Typography className={css.issueTitle}>
-                                                    {cardContent?.title}
-                                                </Typography>
-                                                <Box className='rowFlexBox'>
-                                                    <Typography>#{cardContent.number}</Typography>
-                                                    <Typography>
-                                                        {writeTime(cardContent.openedAt)}
+                                            <Card className={css.issueCard} >
+                                                    <Typography className={css.issueTitle} variant='subtitle1'>
+                                                        {cardContent?.title}
                                                     </Typography>
-                                                </Box>
-                                                <Box className='rowFlexBox'>
-                                                    <Typography>{cardContent.author}</Typography>
-                                                    <Divider flexItem orientation="vertical" />
-                                                    <Typography> Comments: {cardContent.comments} </Typography>
-                                                </Box>
-                                            </Paper>
+                                                    <Box className='rowFlexBox' variant='string'>
+                                                        <Typography  >#{cardContent.number}</Typography>
+                                                        <Typography>
+                                                            {writeTime(cardContent.openedAt)}
+                                                        </Typography>
+                                                    </Box>
+                                                    <Box className='rowFlexBox'>
+                                                        <Typography>{cardContent.author}</Typography>
+                                                        <Divider flexItem orientation="vertical" />
+                                                        <Typography> Comments: {cardContent.comments} </Typography>
+                                                    </Box>
+                                            </Card>
                                         </ListItem>
                                     )
                                 })}
