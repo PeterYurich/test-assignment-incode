@@ -24,13 +24,15 @@ export default function GithubLinks() {
 
     return (
         <>
-            { <Box className={css.box}
-                sx={{mb: 1}}
-                >
-                    <Link href={`https://github.com/${repoOwner}`}>{`${repoOwner}`}</Link>
-                    <span>{' > '}</span>
-                    <Link href={`https://github.com/${repoOwner}/${repoName}`}>{`${repoName}`}</Link>
-                </Box>
+            {<Box>
+                <Link href={`https://github.com/${repoOwner}`} variant="body1">
+                    {`${repoOwner}`}
+                </Link>
+                <span>{' > '}</span>
+                <Link href={`https://github.com/${repoOwner}/${repoName}`} variant="body1">
+                    {`${repoName}`}
+                </Link>
+            </Box>
             }
         </>
 
