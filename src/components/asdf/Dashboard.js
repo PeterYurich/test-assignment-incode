@@ -94,9 +94,8 @@ export default function Dashboard() {
                             <List>
                                 {board.items.length > 0 && board.items.map((issueId, index, arr) => {
                                     const cardContent = currentRepo.issues.find(issue => issue.id === issueId)
-                                    if (!cardContent) {
-                                        arr.splice(index, 1)
-                                        return
+                                    if (!cardContent) { arr.splice(index, 1)
+                                        return <></>
                                     }
                                     return (
                                         <ListItem key={issueId} sx={{ p: 0 }}
