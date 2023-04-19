@@ -27,7 +27,7 @@ export default function Search() {
     storage.save('enteredUrl', enteredUrl)
 
     const arr = enteredUrl.split("/")
-    const [repoOwner, repoName] = [arr[3].toLocaleLowerCase(), arr[4].toLocaleLowerCase()]
+    const [repoOwner, repoName] = [arr[3]?.toLocaleLowerCase(), arr[4]?.toLocaleLowerCase()]
 
     dispatch(fetchRepo({repoOwner, repoName}))
     dispatch(fetchIssues({repoOwner, repoName}))

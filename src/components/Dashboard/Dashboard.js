@@ -4,6 +4,8 @@ import { Paper, Typography, Box, Divider, List, ListItem } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { selectRepo } from 'redux/repo/repoSelectors'
 import storage from 'utils/storage'
+import { timeTillNow } from 'utils/timeTillNow'
+
 
 export default function Dashboard() {
     const [heldIssueId, setHeldIssueId] = useState()
@@ -45,10 +47,6 @@ export default function Dashboard() {
 
     const dragOverHandler = (e) => {
         e.preventDefault()
-        if (e.target.name === "card") {
-            console.log('asdf');
-            e.target.style.boxShadow = '0px 3px 15px 13px rgba(0,0,0,0.75)'
-        }
     }
 
     const dropHandler = (e, finishIssueId, finishBoardIndex) => {
@@ -81,6 +79,18 @@ export default function Dashboard() {
 
         setBoardsState(newBoardsState)
         storage.save(`${currentRepo.id}`, newBoardsState)
+    }
+
+
+    const writeTime = (data) => {
+        const timeDiff = timeTillNow(data)
+        if (timeDiff === 0) {
+            return 'opened today'
+        }
+        if (timeDiff === 1) {
+            return 'opened yesterday'
+        }
+        return `opened ${timeDiff} ago`
     }
 
     return (
@@ -117,7 +127,9 @@ export default function Dashboard() {
                                                 </Typography>
                                                 <Box className='rowFlexBox'>
                                                     <Typography>#{cardContent.number}</Typography>
-                                                    <Typography>{cardContent.openedAt}</Typography>
+                                                    <Typography>
+                                                        {writeTime(cardContent.openedAt)}
+                                                    </Typography>
                                                 </Box>
                                                 <Box className='rowFlexBox'>
                                                     <Typography>{cardContent.author}</Typography>
