@@ -21,9 +21,7 @@ root.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor} >
       <ThemeProvider theme={theme}>
-        <BrowserRouter
-        // basename="test-assignment-incode"
-        >
+        <BrowserRouter>
           <App />
         </BrowserRouter>
       </ThemeProvider>
