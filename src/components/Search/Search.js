@@ -41,7 +41,7 @@ export default function Search() {
           onChange={handleChange}
           className={css.inputField}
         />
-        <Button variant='outlined'
+        <Button variant='outlined' className={css.button}
         onClick={loadRepoIssues}>Load issues</Button>
       </Box>
     </div>

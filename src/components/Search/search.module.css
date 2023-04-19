@@ -1,9 +1,15 @@
-.inputField {
-    width: 100%;
-    margin-bottom: 20px;
-}
-
 .box {
     padding-top: 20px;
     padding-bottom: 20px;
+    display: flex;
+}
+
+.inputField {
+    width: 70%;
+    margin-bottom: 20px;
+    margin-right: 10px;
+}
+
+.button {
+    height: 56px;
 }

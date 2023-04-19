@@ -15,10 +15,11 @@
 
 .boardPaper {
   min-height: 100vh;
-  background-color: rgb(196, 229, 196);
+  background-color: #b5bdc7;
   padding: 10px;
   display: flex;
   width: 100%;
+  box-shadow: inset 0px 0px 123px 56px rgba(0,0,0,0.81);
 }
 
 .boardTitle {

@@ -90,41 +90,43 @@ export default function Dashboard() {
                         <Typography variant='h5' className={css.boardTitle}>
                             {board.title}
                         </Typography>
-                        <Paper className={css.boardPaper}>
-                            <List>
-                                {board.items.length > 0 && board.items.map((issueId, index, arr) => {
-                                    const cardContent = currentRepo.issues.find(issue => issue.id === issueId)
-                                    if (!cardContent) { arr.splice(index, 1)
-                                        return <></>
-                                    }
-                                    return (
-                                        <ListItem key={issueId} sx={{ p: 0 }}
-                                            draggable={true}
-                                            onDragStart={(e) => dragStartHandler(e, issueId, boardIndex)}
-                                            onDragLeave={(e) => dragLeaveHandler(e)}
-                                            onDragEnd={(e) => dragEndHandler(e)}
-                                            onDragOver={(e) => dragOverHandler(e)}
-                                            onDrop={(e) => dropHandler(e, issueId, boardIndex)}
-                                        >
-                                            <Paper className={css.issueCard} >
-                                                <Typography className={css.issueTitle}>
-                                                    {cardContent?.title}
-                                                </Typography>
-                                                <Box className={css.rowFlexBox}>
-                                                    <Typography>#{cardContent.number}</Typography>
-                                                    <Typography>{cardContent.openedAt}</Typography>
-                                                </Box>
-                                                <Box className={css.rowFlexBox}>
-                                                    <Typography>{cardContent.author}</Typography>
-                                                    <Divider flexItem orientation="vertical" />
-                                                    <Typography> Comments: {cardContent.comments} </Typography>
-                                                </Box>
-                                            </Paper>
-                                        </ListItem>
-                                    )
-                                })}
-                            </List>
-                        </Paper>
+                        <div className={css.boardPaper}>
+                            {/* <Paper> */}
+                                <List>
+                                    {board.items.length > 0 && board.items.map((issueId, index, arr) => {
+                                        const cardContent = currentRepo.issues.find(issue => issue.id === issueId)
+                                        if (!cardContent) { arr.splice(index, 1)
+                                            return <></>
+                                        }
+                                        return (
+                                            <ListItem key={issueId} sx={{ p: 0 }}
+                                                draggable={true}
+                                                onDragStart={(e) => dragStartHandler(e, issueId, boardIndex)}
+                                                onDragLeave={(e) => dragLeaveHandler(e)}
+                                                onDragEnd={(e) => dragEndHandler(e)}
+                                                onDragOver={(e) => dragOverHandler(e)}
+                                                onDrop={(e) => dropHandler(e, issueId, boardIndex)}
+                                            >
+                                                <Paper className={css.issueCard} >
+                                                    <Typography className={css.issueTitle}>
+                                                        {cardContent?.title}
+                                                    </Typography>
+                                                    <Box className={css.rowFlexBox}>
+                                                        <Typography>#{cardContent.number}</Typography>
+                                                        <Typography>{cardContent.openedAt}</Typography>
+                                                    </Box>
+                                                    <Box className={css.rowFlexBox}>
+                                                        <Typography>{cardContent.author}</Typography>
+                                                        <Divider flexItem orientation="vertical" />
+                                                        <Typography> Comments: {cardContent.comments} </Typography>
+                                                    </Box>
+                                                </Paper>
+                                            </ListItem>
+                                        )
+                                    })}
+                                </List>
+                            {/* </Paper> */}
+                        </div>
                     </ListItem>
                 ))}
             </List>
