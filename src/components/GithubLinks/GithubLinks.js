@@ -1,35 +1,35 @@
 import { Box, Link } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { selectRepo } from 'redux/repo/repoSelectors'
+import getOwnerAndRepoFromUrl from 'utils/getOwnerAndRepoFromUrl'
+import storage from 'utils/storage'
 
 
 export default function GithubLinks() {
-    const currentRepo = useSelector(selectRepo)
-    const [repoOwner, setRepoOwner] = useState(null)
-    const [repoName, setRepoName] = useState(null)
+    const [enteredUrl, setEnteredUrl] = useState(storage.load('enteredUrl') || null)
+
+    const [repoFullName, setRepoFullName] = useState()
 
     useEffect(() => {
-        const fullRepoName = currentRepo.fullName
 
-        if (fullRepoName !== null) {
-            const arr = fullRepoName.split("/")
-            const [repoOwner, repoName] = [arr[0], arr[1]]
-            setRepoOwner(repoOwner)
-            setRepoName(repoName)
+        if (enteredUrl) {
+            const fullRepoName = getOwnerAndRepoFromUrl(enteredUrl)
+            console.log('fullRepoName: ', fullRepoName);
+            setRepoFullName(fullRepoName)
         }
 
-    }, [currentRepo])
+    }, [enteredUrl])
 
     return (
         <>
-            {<Box>
-                <Link href={`https://github.com/${repoOwner}`} variant="body1">
-                    {`${repoOwner}`}
+            {repoFullName && <Box>
+                <Link variant="body1"
+                    href={`https://github.com/${repoFullName.repoOwner}`} >
+                    {`${repoFullName.repoOwner}`}
                 </Link>
                 <span>{' > '}</span>
-                <Link href={`https://github.com/${repoOwner}/${repoName}`} variant="body1">
-                    {`${repoName}`}
+                <Link variant="body1"
+                    href={`https://github.com/${repoFullName.repoOwner}/${repoFullName.repoName}`} >
+                    {`${repoFullName.repoName}`}
                 </Link>
             </Box>
             }

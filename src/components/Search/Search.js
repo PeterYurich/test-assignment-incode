@@ -6,6 +6,7 @@ import storage from 'utils/storage';
 import css from "./search.module.css"
 import { selectRepo } from 'redux/repo/repoSelectors';
 import { Loader } from 'components/Loader/Loader';
+import getOwnerAndRepoFromUrl from 'utils/getOwnerAndRepoFromUrl';
 
 
 export default function Search() {
@@ -27,11 +28,10 @@ export default function Search() {
 
     storage.save('enteredUrl', enteredUrl)
 
-    const arr = enteredUrl.split("/")
-    const [repoOwner, repoName] = [arr[3]?.toLocaleLowerCase(), arr[4]?.toLocaleLowerCase()]
+    const repoFullName = getOwnerAndRepoFromUrl(enteredUrl)
 
-    dispatch(fetchRepo({ repoOwner, repoName }))
-    dispatch(fetchIssues({ repoOwner, repoName }))
+    dispatch(fetchRepo(repoFullName))
+    dispatch(fetchIssues(repoFullName))
   }
 
   return (
