@@ -64,6 +64,17 @@ export const ThemeOptions = {
     },
     
     components: {
+        MuiCard: {
+            variants: [
+                {
+                    props: {variant: 'canban'},
+                    style: {
+                        width: '100%',
+                        m: 0
+                    }
+                }
+            ]
+        },
         MuiButton: {
             variants: [
                 {

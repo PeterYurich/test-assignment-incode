@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import css from "./dashboard.module.css"
-import { Paper, Typography, Box, Divider, List, ListItem, Card } from '@mui/material'
+import { Typography, Box, Divider, List, ListItem, Card } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { selectRepo } from 'redux/repo/repoSelectors'
 import storage from 'utils/storage'
@@ -21,7 +21,10 @@ export default function Dashboard() {
 
     useEffect(() => {
         if (!savedBoardState) {
-            const allIssuesIds = currentRepo?.issues.map(issue => issue.id)
+            const allIssuesIds = currentRepo?.issues.map(issue => {
+                if (issue.id === 1677260388) { return }
+                return issue.id
+            })
             const newBoardsState = [...boardsState]
             newBoardsState[0].items = allIssuesIds
             setBoardsState(newBoardsState)
@@ -109,27 +112,28 @@ export default function Dashboard() {
                                     }
                                     return (
                                         <ListItem key={issueId} sx={{ p: 0 }}
+                                            className={css.issueCard}
                                             draggable={true}
                                             onDragStart={(e) => dragStartHandler(e, issueId, boardIndex)}
                                             onDragEnd={(e) => dragEndHandler(e)}
                                             onDragOver={(e) => dragOverHandler(e)}
                                             onDrop={(e) => dropHandler(e, issueId, boardIndex)}
                                         >
-                                            <Card className={css.issueCard} >
-                                                    <Typography className={css.issueTitle} variant='subtitle1'>
-                                                        {cardContent?.title}
+                                            <Card className={css.cardContent}>
+                                                <Typography className={css.issueTitle} variant='subtitle1'>
+                                                    {cardContent?.title}
+                                                </Typography>
+                                                <Box className='rowFlexBox' variant='string'>
+                                                    <Typography  >#{cardContent.number}</Typography>
+                                                    <Typography>
+                                                        {writeTime(cardContent.openedAt)}
                                                     </Typography>
-                                                    <Box className='rowFlexBox' variant='string'>
-                                                        <Typography  >#{cardContent.number}</Typography>
-                                                        <Typography>
-                                                            {writeTime(cardContent.openedAt)}
-                                                        </Typography>
-                                                    </Box>
-                                                    <Box className='rowFlexBox'>
-                                                        <Typography>{cardContent.author}</Typography>
-                                                        <Divider flexItem orientation="vertical" />
-                                                        <Typography> Comments: {cardContent.comments} </Typography>
-                                                    </Box>
+                                                </Box>
+                                                <Box className='rowFlexBox'>
+                                                    <Typography>{cardContent.author}</Typography>
+                                                    <Divider flexItem orientation="vertical" />
+                                                    <Typography> Comments: {cardContent.comments} </Typography>
+                                                </Box>
                                             </Card>
                                         </ListItem>
                                     )

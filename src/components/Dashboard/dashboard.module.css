@@ -10,6 +10,7 @@
 
 .board {
   width: calc((100% - 40px) / 3);
+  display: flex;
   flex-direction: column;
 }
 
@@ -20,16 +21,18 @@
   width: 100%;
   background-color: #b3c1d3fe;
   box-shadow: inset 0px 0px 123px 56px rgba(0,0,0,0.81);
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .boardTitle {
   text-align: center;
-  width: 100%;
 }
 
 .issueCard {
   margin-bottom: 10px;
-  padding: 6px;
   cursor: grab;
   width: 100%;
 }
@@ -39,4 +42,9 @@
   transition-property: 'background-color';
   transition-duration: 300ms;
   background-color: #eeecf2;
+}
+
+.cardContent {
+  padding: 6px;
+  width: 100%;
 }

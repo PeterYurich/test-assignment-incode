@@ -2,7 +2,6 @@ import { Box, Link } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { selectRepo } from 'redux/repo/repoSelectors'
-import css from "./githubLinks.module.css"
 
 
 export default function GithubLinks() {
