@@ -41,6 +41,12 @@ export default function Search() {
           value={enteredUrl}
           onChange={handleChange}
           className={css.inputField}
+          onKeyPress={e => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              loadRepoIssues(e);
+            }
+          }}
         />
         {isLoading ? <Loader /> :
           <Button variant='outlined' className={css.button}
