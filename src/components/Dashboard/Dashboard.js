@@ -143,7 +143,7 @@ export default function Dashboard() {
                                                 <Box className={css.rowFlexBox} variant='string'>
                                                     <Typography  >#{cardContent.number}</Typography>
                                                     <Typography>
-                                                        {writeTime(css.openedAt)}
+                                                        {writeTime(cardContent.openedAt)}
                                                     </Typography>
                                                 </Box>
                                                 <Box className={css.rowFlexBox}>

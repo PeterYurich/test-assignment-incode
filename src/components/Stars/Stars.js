@@ -15,12 +15,10 @@ export default function Stars() {
 
     useEffect(() => {
         const starsAmount = currentRepo.stars
-
         if (starsAmount !== null) {
             const decoratedStarsAmount = separateThousands(starsAmount)
             setStarsAmount(decoratedStarsAmount)
         }
-
     }, [currentRepo])
 
     return (
@@ -31,6 +29,5 @@ export default function Stars() {
             </Box>
             }
         </>
-
     )
 }
