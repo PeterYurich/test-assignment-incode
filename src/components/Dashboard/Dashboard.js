@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import css from "./dashboard.module.css"
+import 'commonStyles.css'
 import { Typography, Box, Divider, List, ListItem, Card } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { selectRepo } from 'redux/repo/repoSelectors'
@@ -140,13 +141,13 @@ export default function Dashboard() {
                                                 <Typography className={css.issueTitle} variant='subtitle1'>
                                                     {cardContent?.title}
                                                 </Typography>
-                                                <Box className={css.rowFlexBox} variant='string'>
+                                                <Box className='rowFlexBox' variant='string'>
                                                     <Typography  >#{cardContent.number}</Typography>
                                                     <Typography>
                                                         {writeTime(cardContent.openedAt)}
                                                     </Typography>
                                                 </Box>
-                                                <Box className={css.rowFlexBox}>
+                                                <Box className='rowFlexBox'>
                                                     <Typography>{cardContent.author}</Typography>
                                                     <Divider flexItem orientation="vertical" />
                                                     <Typography> Comments: {cardContent.comments} </Typography>

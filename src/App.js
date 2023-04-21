@@ -1,4 +1,4 @@
-import css from './app.module.css'
+import 'commonStyles.css'
 import { Container, Box } from '@mui/material';
 import { Dashboard, GithubLinks, Search, Stars } from 'components';
 import { useSelector } from 'react-redux';
@@ -13,7 +13,7 @@ function App() {
       <Search />
       {currentRepo.id &&
         <Container >
-          <Box className={css.rowFlexBox}>
+          <Box className='rowFlexBox'>
             <GithubLinks />
             <Stars />
           </Box>
