@@ -4,6 +4,7 @@ import { fetchRepo, fetchIssues } from './repoOperations';
 
 const initialState = {
     id: '',
+    url: '',
     stars: 0,
     fullName: null,
     issues: [],
@@ -20,10 +21,12 @@ export const repoSlice = createSlice({
                 state.isLoading = true;
             })
             .addCase(fetchRepo.fulfilled, (state, { payload }) => {
+                console.log('payload: ', payload);
                 state.isLoading = false;
                 state.id = payload.id;
                 state.stars = payload.watchers;
                 state.fullName = payload.full_name;
+                state.url = payload.html_url
             })
             .addCase(fetchRepo.rejected, (state, { payload }) => {
                 state.isLoading = false;

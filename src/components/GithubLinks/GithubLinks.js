@@ -1,23 +1,20 @@
 import { Box, Link } from '@mui/material'
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { selectRepo } from 'redux/repo/repoSelectors'
 import getOwnerAndRepoFromUrl from 'utils/getOwnerAndRepoFromUrl'
-import storage from 'utils/storage'
 
 
 export default function GithubLinks() {
-    const [enteredUrl, setEnteredUrl] = useState(storage.load('enteredUrl') || null)
-
     const [repoFullName, setRepoFullName] = useState()
+    const { url } = useSelector(selectRepo)
 
     useEffect(() => {
-
-        if (enteredUrl) {
-            const fullRepoName = getOwnerAndRepoFromUrl(enteredUrl)
-            console.log('fullRepoName: ', fullRepoName);
+        if (url) {
+            const fullRepoName = getOwnerAndRepoFromUrl(url)
             setRepoFullName(fullRepoName)
         }
-
-    }, [enteredUrl])
+    }, [url])
 
     return (
         <>
