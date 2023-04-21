@@ -12,18 +12,3 @@ code {
     monospace;
 }
 
-.container {
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-.center-text {
-  text-align: center;
-}
-
-.rowFlexBox {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
-}

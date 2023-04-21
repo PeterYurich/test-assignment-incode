@@ -5,6 +5,7 @@ import { selectRepo } from 'redux/repo/repoSelectors'
 import separateThousands from 'utils/separateThousands';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import {useTheme} from '@mui/material';
+import css from './stars.module.css'
 
 export default function Stars() {
     const currentRepo = useSelector(selectRepo)
@@ -24,7 +25,7 @@ export default function Stars() {
 
     return (
         <>
-            {<Box className='rowFlexBox' >
+            {<Box className={css.rowFlexBox} >
                 <StarRoundedIcon htmlColor={palette.primary.main}></StarRoundedIcon>
                 <Typography >{starsAmount} stars</Typography>
             </Box>

@@ -3,6 +3,7 @@ import { Container, Box } from '@mui/material';
 import { Dashboard, GithubLinks, Search, Stars } from 'components';
 import { useSelector } from 'react-redux';
 import { selectRepo } from 'redux/repo/repoSelectors';
+import css from 'app.module.css'
 
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
       <Search />
       {currentRepo.id &&
         <Container >
-          <Box className='rowFlexBox'>
+          <Box className={css.rowFlexBox}>
             <GithubLinks />
             <Stars />
           </Box>

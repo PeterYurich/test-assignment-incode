@@ -19,7 +19,6 @@ export default function Dashboard() {
 
         if (!savedBoardState) {
             const allIssuesIds = currentRepo?.issues.map(issue => {
-                // if (issue.id === 1677260388) { return '1677260388' }
                 return issue.id
             })
             const newBoardsState = [
@@ -141,13 +140,13 @@ export default function Dashboard() {
                                                 <Typography className={css.issueTitle} variant='subtitle1'>
                                                     {cardContent?.title}
                                                 </Typography>
-                                                <Box className='rowFlexBox' variant='string'>
+                                                <Box className={css.rowFlexBox} variant='string'>
                                                     <Typography  >#{cardContent.number}</Typography>
                                                     <Typography>
-                                                        {writeTime(cardContent.openedAt)}
+                                                        {writeTime(css.openedAt)}
                                                     </Typography>
                                                 </Box>
-                                                <Box className='rowFlexBox'>
+                                                <Box className={css.rowFlexBox}>
                                                     <Typography>{cardContent.author}</Typography>
                                                     <Divider flexItem orientation="vertical" />
                                                     <Typography> Comments: {cardContent.comments} </Typography>
