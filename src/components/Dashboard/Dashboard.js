@@ -12,25 +12,42 @@ export default function Dashboard() {
     const [startBoardIndex, setStartBoardIndex] = useState()
 
     const currentRepo = useSelector(selectRepo)
-    const savedBoardState = storage.load(`${currentRepo.id}`)
-    const [boardsState, setBoardsState] = useState(savedBoardState || [
-        { id: 1, title: 'To Do', items: [] },
-        { id: 2, title: 'In Progress', items: [] },
-        { id: 3, title: 'Done', items: [] }
-    ])
+    const [boardsState, setBoardsState] = useState()
 
     useEffect(() => {
+        const savedBoardState = storage.load(`${currentRepo.id}` || null)
+
         if (!savedBoardState) {
             const allIssuesIds = currentRepo?.issues.map(issue => {
-                if (issue.id === 1677260388) { return }
+                // if (issue.id === 1677260388) { return '1677260388' }
                 return issue.id
             })
-            const newBoardsState = [...boardsState]
-            newBoardsState[0].items = allIssuesIds
+            const newBoardsState = [
+                { id: 1, title: 'To Do', items: [] },
+                { id: 2, title: 'In Progress', items: [] },
+                { id: 3, title: 'Done', items: [] }
+            ]
+            const toDoBoard = newBoardsState[0]
+            toDoBoard.items = allIssuesIds
             setBoardsState(newBoardsState)
             return
         }
-        setBoardsState(savedBoardState)
+
+
+        const newBoardsState = [...savedBoardState]
+        const [toDoBoard, inProgressBoard, DoneBoard] = newBoardsState
+        const newIssues = currentRepo?.issues.map(issue => {
+            if (
+                !DoneBoard.items.includes(issue.id) &&
+                !inProgressBoard.items.includes(issue.id) &&
+                !toDoBoard.items.includes(issue.id) 
+            ) {
+                return issue.id
+            }
+            return ''
+        })
+        toDoBoard.items = [...newIssues, ...toDoBoard.items]
+        setBoardsState(newBoardsState)
 
     }, [currentRepo])
 
@@ -94,7 +111,7 @@ export default function Dashboard() {
     return (
         <Box>
             <List className={css.boardWrapper}>
-                {boardsState.map((board, boardIndex) => (
+                {boardsState && boardsState.map((board, boardIndex) => (
                     <ListItem className={css.board} key={board.id}
                         onDragOver={(e) => dragOverHandler(e)}
                         onDrop={(e) => dropCardHandler(e, boardIndex)}
