@@ -36,16 +36,15 @@ export default function Dashboard() {
 
         const newBoardsState = [...savedBoardState]
         const [toDoBoard, inProgressBoard, DoneBoard] = newBoardsState
-        const newIssues = currentRepo?.issues.map(issue => {
-            if (
-                !DoneBoard.items.includes(issue.id) &&
-                !inProgressBoard.items.includes(issue.id) &&
-                !toDoBoard.items.includes(issue.id) 
-            ) {
-                return issue.id
-            }
-        })
-        toDoBoard.items = [...newIssues, ...toDoBoard.items]
+        console.log('currentRepo: ', currentRepo);
+        const newIssues = currentRepo?.issues.filter(issue => 
+            !DoneBoard.items.includes(issue.id) &&
+            !inProgressBoard.items.includes(issue.id) &&
+            !toDoBoard.items.includes(issue.id) 
+            )
+            console.log('newIssues : ', newIssues );
+        const newIssuesIds = newIssues.map(issue => issue.id)
+        toDoBoard.items = [...newIssuesIds, ...toDoBoard.items]
         setBoardsState(newBoardsState)
 
     }, [currentRepo])
