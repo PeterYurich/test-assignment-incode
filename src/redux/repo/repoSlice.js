@@ -21,7 +21,6 @@ export const repoSlice = createSlice({
                 state.isLoading = true;
             })
             .addCase(fetchRepo.fulfilled, (state, { payload }) => {
-                console.log('payload: ', payload);
                 state.isLoading = false;
                 state.id = payload.id;
                 state.stars = payload.watchers;
