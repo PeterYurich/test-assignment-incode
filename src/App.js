@@ -1,7 +1,6 @@
 import './App.css';
 import { Container, Box } from '@mui/material';
 import { Dashboard, GithubLinks, Search, Stars } from 'components';
-import Error from 'components/error';
 import { useSelector } from 'react-redux';
 import { selectRepo } from 'redux/repo/repoSelectors';
 
@@ -20,7 +19,6 @@ function App() {
           </Box>
           <Dashboard />
         </Container>}
-        <Error />
     </Container>
   );
 }

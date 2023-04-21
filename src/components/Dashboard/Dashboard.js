@@ -36,13 +36,11 @@ export default function Dashboard() {
 
         const newBoardsState = [...savedBoardState]
         const [toDoBoard, inProgressBoard, DoneBoard] = newBoardsState
-        console.log('currentRepo: ', currentRepo);
-        const newIssues = currentRepo?.issues.filter(issue => 
+        const newIssues = currentRepo?.issues.filter(issue =>
             !DoneBoard.items.includes(issue.id) &&
             !inProgressBoard.items.includes(issue.id) &&
-            !toDoBoard.items.includes(issue.id) 
-            )
-            console.log('newIssues : ', newIssues );
+            !toDoBoard.items.includes(issue.id)
+        )
         const newIssuesIds = newIssues.map(issue => issue.id)
         toDoBoard.items = [...newIssuesIds, ...toDoBoard.items]
         setBoardsState(newBoardsState)
@@ -105,12 +103,17 @@ export default function Dashboard() {
         storage.save(`${currentRepo.id}`, newBoardsState)
     }
 
+    const boardGap = (boardsState?.length - 1) * 20;
+
 
     return (
         <Box>
             <List className={css.boardWrapper}>
                 {boardsState && boardsState.map((board, boardIndex) => (
-                    <ListItem className={css.board} key={board.id}
+                    <ListItem
+                        style={{ width: `calc((100% - ${boardGap}px) / ${boardsState.length})` }}
+                        className={css.board}
+                        key={board.id}
                         onDragOver={(e) => dragOverHandler(e)}
                         onDrop={(e) => dropCardHandler(e, boardIndex)}
                     >
@@ -158,6 +161,6 @@ export default function Dashboard() {
                     </ListItem>
                 ))}
             </List>
-        </Box>
+        </Box >
     )
 }
