@@ -44,7 +44,6 @@ export default function Dashboard() {
             ) {
                 return issue.id
             }
-            return ''
         })
         toDoBoard.items = [...newIssues, ...toDoBoard.items]
         setBoardsState(newBoardsState)
