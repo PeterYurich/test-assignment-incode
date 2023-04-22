@@ -44,7 +44,7 @@ export default function IssueCard({ content, boardIndex, issueId,
         if (timeDiff === 1) {
             return 'opened yesterday'
         }
-        return `opened ${timeDiff} ago`
+        return `opened ${timeDiff} days ago`
     }
 
     const { title, number, openedAt, author, comments } = content
