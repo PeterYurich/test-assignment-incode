@@ -45,7 +45,6 @@ export default function Dashboard() {
 
     }, [currentRepo])
 
-
     const dragOverHandler = (e) => {
         e.preventDefault()
     }
@@ -83,7 +82,7 @@ export default function Dashboard() {
                         <Typography variant='h5' className={css.boardTitle}>
                             {board.title}
                         </Typography>
-                        <div className={css.boardPaper}>
+                        <Box className={css.boardPaper}>
 
                             <List>
                                 {board.items.length > 0 && board.items.map((issueId, index, arr) => {
@@ -93,7 +92,8 @@ export default function Dashboard() {
                                         return <></>
                                     }
                                     return (
-                                        <IssueCard content={cardContent} key={issueId}
+                                        <IssueCard key={issueId}
+                                            content={cardContent}
                                             boardIndex={boardIndex}
                                             issueId={issueId}
                                             boardsState={boardsState}
@@ -106,7 +106,7 @@ export default function Dashboard() {
                                     )
                                 })}
                             </List>
-                        </div>
+                        </Box>
                     </ListItem>
                 ))}
             </List>

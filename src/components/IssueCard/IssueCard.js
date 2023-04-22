@@ -63,7 +63,7 @@ export default function IssueCard({ content, boardIndex, issueId,
                 </Typography>
                 <Box className='rowFlexBox' variant='string'>
                     <Typography  >#{number}</Typography>
-                    <Typography>
+                    <Typography data-testid='time'>
                         {writeTime(openedAt)}
                     </Typography>
                 </Box>
@@ -78,19 +78,23 @@ export default function IssueCard({ content, boardIndex, issueId,
 }
 
 IssueCard.propTypes = {
-    content: PropTypes.objectOf({
-        title: PropTypes.string, 
-        number: PropTypes.number,
-        openedAt: PropTypes.string, 
-        author: PropTypes.string, 
-        comments: PropTypes.number
-    }), 
-    boardIndex: PropTypes.number.isRequired, 
-    issueId: PropTypes.number.isRequired, 
-    boardsState: PropTypes.func.isRequired,
+    content: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        number: PropTypes.number.isRequired,
+        openedAt: PropTypes.string.isRequired,
+        author: PropTypes.string.isRequired,
+        comments: PropTypes.number.isRequired
+    }).isRequired,
+    boardIndex: PropTypes.number.isRequired,
+    issueId: PropTypes.number.isRequired,
+    boardsState: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        items: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
+    })).isRequired,
     setBoardsState: PropTypes.func.isRequired,
-    heldIssueId: PropTypes.number.isRequired,
+    heldIssueId: PropTypes.number,
     setHeldIssueId: PropTypes.func.isRequired,
-    startBoardIndex: PropTypes.number.isRequired,
+    startBoardIndex: PropTypes.number,
     setStartBoardIndex: PropTypes.func.isRequired
 }
