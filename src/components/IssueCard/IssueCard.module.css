@@ -1,0 +1,17 @@
+.issueCard {
+    margin-bottom: 10px;
+    cursor: grab;
+    width: 100%;
+  }
+  
+  .issueCard:hover {
+    transition:cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition-property: 'background-color';
+    transition-duration: 300ms;
+    background-color: #eeecf2;
+  }
+  
+  .cardContent {
+    padding: 6px;
+    width: 100%;
+  }

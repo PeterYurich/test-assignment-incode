@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import css from "./dashboard.module.css"
-import 'commonStyles.css'
-import { Typography, Box, Divider, List, ListItem, Card } from '@mui/material'
+import { Typography, Box, List, ListItem } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { selectRepo } from 'redux/repo/repoSelectors'
 import storage from 'utils/storage'
-import { timeTillNow } from 'utils/timeTillNow'
+import { IssueCard } from 'components'
 
 
 export default function Dashboard() {
@@ -33,7 +32,6 @@ export default function Dashboard() {
             return
         }
 
-
         const newBoardsState = [...savedBoardState]
         const [toDoBoard, inProgressBoard, DoneBoard] = newBoardsState
         const newIssues = currentRepo?.issues.filter(issue =>
@@ -47,44 +45,9 @@ export default function Dashboard() {
 
     }, [currentRepo])
 
-    const writeTime = (data) => {
-        const timeDiff = timeTillNow(data)
-        if (timeDiff === 0) {
-            return 'opened today'
-        }
-        if (timeDiff === 1) {
-            return 'opened yesterday'
-        }
-        return `opened ${timeDiff} ago`
-    }
-
-    const dragStartHandler = (e, issueId, boardIndex) => {
-        setHeldIssueId(issueId)
-        setStartBoardIndex(boardIndex)
-    }
-
-    const dragEndHandler = (e) => {
-        e.preventDefault()
-    }
 
     const dragOverHandler = (e) => {
         e.preventDefault()
-    }
-
-    const dropHandler = (e, finishIssueId, finishBoardIndex) => {
-        e.preventDefault()
-
-        const newBoardsState = [...boardsState]
-
-        const heldIssueIndex = boardsState[startBoardIndex].items.indexOf(heldIssueId)
-        const finishIssueIndex = boardsState[finishBoardIndex].items.indexOf(finishIssueId)
-
-        if (heldIssueId === finishIssueId) { return }
-
-        newBoardsState[startBoardIndex].items.splice(heldIssueIndex, 1)
-        newBoardsState[finishBoardIndex].items.splice(finishIssueIndex, 0, heldIssueId)
-        setBoardsState(newBoardsState)
-        storage.save(`${currentRepo.id}`, newBoardsState)
     }
 
     const dropCardHandler = (e, finishBoardIndex) => {
@@ -121,6 +84,7 @@ export default function Dashboard() {
                             {board.title}
                         </Typography>
                         <div className={css.boardPaper}>
+
                             <List>
                                 {board.items.length > 0 && board.items.map((issueId, index, arr) => {
                                     const cardContent = currentRepo.issues.find(issue => issue.id === issueId)
@@ -129,31 +93,16 @@ export default function Dashboard() {
                                         return <></>
                                     }
                                     return (
-                                        <ListItem key={issueId} sx={{ p: 0 }}
-                                            className={css.issueCard}
-                                            draggable={true}
-                                            onDragStart={(e) => dragStartHandler(e, issueId, boardIndex)}
-                                            onDragEnd={(e) => dragEndHandler(e)}
-                                            onDragOver={(e) => dragOverHandler(e)}
-                                            onDrop={(e) => dropHandler(e, issueId, boardIndex)}
-                                        >
-                                            <Card className={css.cardContent}>
-                                                <Typography className={css.issueTitle} variant='subtitle1'>
-                                                    {cardContent?.title}
-                                                </Typography>
-                                                <Box className='rowFlexBox' variant='string'>
-                                                    <Typography  >#{cardContent.number}</Typography>
-                                                    <Typography>
-                                                        {writeTime(cardContent.openedAt)}
-                                                    </Typography>
-                                                </Box>
-                                                <Box className='rowFlexBox'>
-                                                    <Typography>{cardContent.author}</Typography>
-                                                    <Divider flexItem orientation="vertical" />
-                                                    <Typography> Comments: {cardContent.comments} </Typography>
-                                                </Box>
-                                            </Card>
-                                        </ListItem>
+                                        <IssueCard content={cardContent} key={issueId}
+                                            boardIndex={boardIndex}
+                                            issueId={issueId}
+                                            boardsState={boardsState}
+                                            setBoardsState={setBoardsState}
+                                            heldIssueId={heldIssueId}
+                                            setHeldIssueId={setHeldIssueId}
+                                            startBoardIndex={startBoardIndex}
+                                            setStartBoardIndex={setStartBoardIndex}
+                                        />
                                     )
                                 })}
                             </List>
